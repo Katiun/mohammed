@@ -1,6 +1,5 @@
 import lejos.robotics.subsumption.Behavior;
 
-
 public class Dummy implements Behavior{
 
 	@Override
