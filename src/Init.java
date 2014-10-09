@@ -22,8 +22,9 @@ public class Init {
 		RotateLeft rotateLeft = new RotateLeft(pilot, cs);
 		Sholve sholve = new Sholve(ir, pilot);
 		Dummy dummy = new Dummy();
+		Shoter shoter = new Shoter();
 		
-		Behavior[] behaviorList = {forward, rotateLeft, sholve};
+		Behavior[] behaviorList = {forward, rotateLeft, sholve, shoter};
 		
 		Arbitrator arbitor = new Arbitrator(behaviorList);
 		arbitor.start();
