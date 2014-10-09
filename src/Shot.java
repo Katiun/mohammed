@@ -38,8 +38,8 @@ public class Shot {
 			System.exit(1);
 		}
 			
-		DataInputStream dis = connection.openDataInputStream();
-        DataOutputStream dos = connection.openDataOutputStream();
+		dis = connection.openDataInputStream();
+        dos = connection.openDataOutputStream();
 
 	}
 	
