@@ -29,17 +29,28 @@ public class Shot {
     
     
 	private Shot() {
+		try {
+		Delay.msDelay(3000);
 
 		RS485Connection connection = RS485.connect(NAME, NXTConnection.PACKET);
+		LCD.drawString("22222222", 0, 0);
+		Delay.msDelay(3000);
+		
 		if (connection == null){
-			LCD.drawString("Error al", 0, 0);
-			LCD.drawString("Conectar", 0, 1);
+			System.out.println("Error al conectar");
 			Delay.msDelay(5000);
 			System.exit(1);
 		}
+		LCD.drawString("33333333", 0, 0);
+		Delay.msDelay(3000);
 			
 		dis = connection.openDataInputStream();
         dos = connection.openDataOutputStream();
+		LCD.drawString("44444444", 0, 0);
+		Delay.msDelay(3000);
+		} catch (Exception e) {
+			System.out.println("Error al crear shot");
+		}
 
 	}
 	
@@ -81,7 +92,7 @@ public class Shot {
         try{
         	sendInt(HIGH);
         }catch (IOException ioe){
-            LCD.drawString("shotHigh Exception", 0, 0);
+            System.out.println("shotHigh Exception");
         }
 	}
 	

@@ -11,7 +11,6 @@ public class Shoter implements Behavior{
 
 	@Override
 	public void action() {
-		// TODO Auto-generated method stub
 		Shot.getInstance().shotHigh();
 	}
 

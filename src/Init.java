@@ -18,13 +18,13 @@ public class Init {
 		CompassPilot pilot = new CompassPilot(cs, 56f, 140f, Motor.A, Motor.B);
 		OpticalDistanceSensor ir = new OpticalDistanceSensor(SensorPort.S2);
 		
-		Forward forward = new Forward(cs, pilot, ir);
-		RotateLeft rotateLeft = new RotateLeft(pilot, cs);
-		Sholve sholve = new Sholve(ir, pilot);
-		Dummy dummy = new Dummy();
+		//Forward forward = new Forward(cs, pilot, ir);
+		//RotateLeft rotateLeft = new RotateLeft(pilot, cs);
+		//Sholve sholve = new Sholve(ir, pilot);
+		//Dummy dummy = new Dummy();
 		Shoter shoter = new Shoter();
 		
-		Behavior[] behaviorList = {forward, rotateLeft, sholve, shoter};
+		Behavior[] behaviorList = {shoter};
 		
 		Arbitrator arbitor = new Arbitrator(behaviorList);
 		arbitor.start();
