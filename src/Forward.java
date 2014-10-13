@@ -47,11 +47,18 @@ public class Forward implements Behavior{
 //			moving = true;
 //		}
 		suppressed = false;
-		pilot.forward();
-		while( !suppressed ){
-	        Thread.yield();
+//		pilot.forward();
+//		while( !suppressed ){
+//	        Thread.yield();
+//		}
+//		pilot.stop();
+		Constants.LEFT_MOTOR.setSpeed(Constants.SPEED_FORWARD_LEFT_MOTOR);
+		Constants.RIGHT_MOTOR.setSpeed(Constants.SPEED_FORWARD_RIGHT_MOTOR);
+		while (!suppressed){
+			Thread.yield();
 		}
-		pilot.stop();
+		Constants.LEFT_MOTOR.stop();
+		Constants.RIGHT_MOTOR.stop();
 	}
 
 	@Override

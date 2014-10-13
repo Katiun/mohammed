@@ -7,8 +7,6 @@ import lejos.util.Delay;
 
 public class Sholve implements Behavior{
 
-	private final int SPEED = 200;
-	private final int ANGLE = 200;
 	private int state;
 	OpticalDistanceSensor ir;
 	CompassPilot pilot;
@@ -22,7 +20,7 @@ public class Sholve implements Behavior{
 	@Override
 	public boolean takeControl() {
 		// TODO Auto-generated method stub
-		return state == 0 && ir.getDistance() < 220;
+		return state == 0 && ir.getDistance() < Constants.DISTANCE_SHOLVE;
 	}
 
 	@Override
@@ -33,20 +31,19 @@ public class Sholve implements Behavior{
 		pilot.backward();
 		Delay.msDelay(500);
 		pilot.stop();
-		Motor.C.setSpeed(SPEED);
-		Motor.C.rotateTo(ANGLE);
-		Motor.C.rotateTo(0);
-		Motor.C.stop();
+		Constants.SHOLVE_MOTOR.setSpeed(Constants.SPEED_SHOLVE);
+		Constants.SHOLVE_MOTOR.rotateTo(Constants.ANGLE_SHOLVE);
+		Constants.SHOLVE_MOTOR.rotateTo(0);
+		Constants.SHOLVE_MOTOR.stop();
 		pilot.forward();
-		Delay.msDelay(500);
+		Delay.msDelay(550);
 		pilot.stop();
 		pilot.backward();
-		Delay.msDelay(500);
+		Delay.msDelay(550);
 		pilot.stop();
-		Motor.C.setSpeed(SPEED);
-		Motor.C.rotateTo(ANGLE);
-		Motor.C.rotateTo(0);
-		Motor.C.stop();
+		Constants.SHOLVE_MOTOR.setSpeed(Constants.SPEED_SHOLVE);
+		Constants.SHOLVE_MOTOR.rotateTo(Constants.ANGLE_SHOLVE);
+
 		Variables.turn = true;
 		state = 0;
 	}

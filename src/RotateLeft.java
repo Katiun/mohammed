@@ -2,14 +2,10 @@ import lejos.nxt.Motor;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.robotics.navigation.CompassPilot;
 import lejos.robotics.subsumption.Behavior;
+import lejos.util.Delay;
 
 
-public class RotateLeft implements Behavior{
-
-	CompassPilot pilot;
-	CompassHTSensor cs;
-	private final int SPEED = 200;
-	private final int ANGLE = 200;
+public class RotateLeft extends Rotate implements Behavior{
 	
 	public RotateLeft(CompassPilot pilot, CompassHTSensor cs){
 		this.pilot = pilot;
@@ -18,36 +14,27 @@ public class RotateLeft implements Behavior{
 	
 	@Override
 	public boolean takeControl() {
-		// TODO Auto-generated method stub
-		return Variables.turn;
+		return Variables.turn && (Variables.whereToTurn == TURN.LEFT_1 || Variables.whereToTurn == TURN.LEFT_2);
 	}
 
 	@Override
 	public void action() {
-		// TODO Auto-generated method stub
-		System.out.println("ACT " + Variables.turn);
+		//Seteo variables
 		Variables.turn = false;
-		//positivo a la izquierda, negativo a la derecha
-		pilot.resetCartesianZero();
-////		float degrees = cs.getDegreesCartesian();
-////		while (degrees != 90){
-////			System.out.println("" + degrees);
-////			degrees = cs.getDegreesCartesian();
-////		}
-//		pilot.rotate(90);
-////		pilot.stop();
-//		System.out.println("ACT FIN");
-		Motor.C.setSpeed(SPEED);
-		Motor.C.rotateTo(ANGLE);
-		pilot.rotate(-270);
-		Motor.C.rotateTo(0);
-		Motor.C.stop();		
+		cs.resetCartesianZero();
+
+		rotate2(Constants.RIGHT_MOTOR, Constants.LEFT_MOTOR);
+		
+//		//Cambio el estado para el proximo giro
+//		if (Variables.whereToTurn == TURN.LEFT_1){
+//			Variables.whereToTurn = TURN.LEFT_2;
+//		}else{
+//			Variables.whereToTurn = TURN.RIGHT_1;
+//		}
 	}
 
 	@Override
 	public void suppress() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
