@@ -16,18 +16,19 @@ public class Init {
 		
 		//Inicializacion de variables
 		Variables.whereToTurn = TURN.LEFT_2;
+		Variables.state = Constants.STATE.FAR_LEFT;
 		
 		CompassHTSensor cs = new CompassHTSensor(SensorPort.S3);
 		CompassPilot pilot = new CompassPilot(cs, 56f, 136f, Motor.A, Motor.B);
 		OpticalDistanceSensor ir = new OpticalDistanceSensor(SensorPort.S2);
 		
 		Forward forward = new Forward(cs, pilot, ir);
-		RotateLeft rotateLeft = new RotateLeft(pilot, cs);
-		RotateRight rotateRight = new RotateRight(pilot, cs);
+		RotateLeft rotateLeft = new RotateLeft(cs);
+		RotateRight rotateRight = new RotateRight(cs);
 		Sholve sholve = new Sholve(ir, pilot);
-		Shoter shoter = new Shoter();
+//		Shoter shoter = new Shoter();
 		
-		Behavior[] behaviorList = {forward, shoter, sholve, rotateLeft, rotateRight};
+		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight};
 		
 		Arbitrator arbitor = new Arbitrator(behaviorList);
 		arbitor.start();

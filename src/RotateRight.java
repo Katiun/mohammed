@@ -1,15 +1,11 @@
-import lejos.nxt.Motor;
 import lejos.nxt.addon.CompassHTSensor;
-import lejos.robotics.navigation.CompassPilot;
 import lejos.robotics.subsumption.Behavior;
-import lejos.util.Delay;
 
 
 public class RotateRight extends Rotate implements Behavior{
 
 	
-	public RotateRight(CompassPilot pilot, CompassHTSensor cs){
-		this.pilot = pilot;
+	public RotateRight(CompassHTSensor cs){
 		this.cs = cs;
 	}
 	
@@ -24,12 +20,18 @@ public class RotateRight extends Rotate implements Behavior{
 		Variables.turn = false;
 		cs.resetCartesianZero();
 		
-		//Cambio el estado para el proximo giro
-		if (Variables.whereToTurn == TURN.RIGHT_1){
-			Variables.whereToTurn = TURN.RIGHT_2;
-		}else{
-			Variables.whereToTurn = TURN.LEFT_1;
-		}
+		switch(Variables.state){
+		case FAR_RIGHT:
+		case MEDIUM_RIGHT:
+			rotate1(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
+			break;
+			
+		case NEARBY_RIGHT:
+		case UP_RIGHT:
+			rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
+			break;
+	}
+
 	}
 
 	@Override
