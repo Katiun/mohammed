@@ -3,6 +3,8 @@ public class Variables {
 
 	public static boolean turn = false;
 	public static TURN whereToTurn = TURN.LEFT_2;
+	public static Constants.STATE state = Constants.STATE.FAR_LEFT;
+	
 	
 }
 
