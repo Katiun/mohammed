@@ -3,10 +3,11 @@ import lejos.robotics.subsumption.Behavior;
 
 public class Shoter implements Behavior{
 
+	
+	
 	@Override
 	public boolean takeControl() {
-		//System.out.println("Uso el dummy?");
-		return true;
+		return Variables.state ;
 	}
 
 	@Override

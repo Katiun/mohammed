@@ -33,7 +33,6 @@ public class Shot {
 		Delay.msDelay(3000);
 
 		RS485Connection connection = RS485.connect(NAME, NXTConnection.PACKET);
-		LCD.drawString("22222222", 0, 0);
 		Delay.msDelay(3000);
 		
 		if (connection == null){
@@ -41,12 +40,10 @@ public class Shot {
 			Delay.msDelay(5000);
 			System.exit(1);
 		}
-		LCD.drawString("33333333", 0, 0);
 		Delay.msDelay(3000);
 			
 		dis = connection.openDataInputStream();
         dos = connection.openDataOutputStream();
-		LCD.drawString("44444444", 0, 0);
 		Delay.msDelay(3000);
 		} catch (Exception e) {
 			System.out.println("Error al crear shot");
@@ -107,5 +104,34 @@ public class Shot {
             LCD.refresh();
         }
 	}
-
+	
+	public void shoter(){
+		try{
+			switch (Variables.state) {
+			case FAR_LEFT:
+				sendInt((-1) * HIGH);
+				break;
+			case FAR_RIGHT:
+				sendInt(HIGH);
+				break;
+			case MEDIUM_LEFT:
+				sendInt((-1) * MEDIUM);
+				break;
+			case MEDIUM_RIGHT:
+				sendInt(MEDIUM);				
+				break;
+			case NEARBY_LEFT:
+				sendInt((-1) * SLOW);
+				break;
+			case NEARBY_RIGHT:
+				sendInt(SLOW);
+				break;
+			default:
+				sendInt(STOP);
+				break;
+			}
+		} catch(IOException ioe){
+			LCD.drawString("shoter Exception", 0, 0);
+		}
+	}
 }
