@@ -23,23 +23,27 @@ public class Constants {
 	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public enum STATE{
-		FAR_RIGHT,
 		FAR_LEFT,
-		MEDIUM_RIGHT,
-		MEDIUM_LEFT,
-		NEARBY_RIGHT,
-		NEARBY_LEFT,
-		UP_RIGHT,
-		UP_LEFT,
-		FAR_RIGHT_ROTATING,
 		FAR_LEFT_ROTATING,
+		MEDIUM_RIGHT,
 		MEDIUM_RIGHT_ROTATING,
-		MEDIUM_LEFT_ROTATING,
-		NEARBY_RIGHT_ROTATING,
+		NEARBY_LEFT,
 		NEARBY_LEFT_ROTATING,
-		UP_RIGHT_ROTATING,
+		UP_LEFT,
 		UP_LEFT_ROTATING,
+		FAR_RIGHT,
+		FAR_RIGHT_ROTATING,
+		MEDIUM_LEFT,
+		MEDIUM_LEFT_ROTATING,
+		NEARBY_RIGHT,
+		NEARBY_RIGHT_ROTATING,
+		UP_RIGHT,
+		UP_RIGHT_ROTATING
+		;
 		
+		public static STATE getNextState(int actualState){
+			return values()[(actualState + 1) % values().length];
+		}
 	}
 	
 }
