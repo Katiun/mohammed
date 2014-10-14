@@ -7,7 +7,7 @@ public class Shoter implements Behavior{
 	
 	@Override
 	public boolean takeControl() {
-		return Variables.state ;
+		return true;
 	}
 
 	@Override
