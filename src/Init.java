@@ -15,6 +15,7 @@ public class Init {
 		Delay.msDelay(5000);
 		
 		//Inicializacion de variables
+		Variables.turn = false;
 		Variables.whereToTurn = TURN.LEFT_2;
 		Variables.state = Constants.STATE.FAR_LEFT;
 		

@@ -54,13 +54,16 @@ public class Forward implements Behavior{
 //		pilot.stop();
 		Constants.LEFT_MOTOR.setSpeed(Constants.SPEED_FORWARD_LEFT_MOTOR);
 		Constants.RIGHT_MOTOR.setSpeed(Constants.SPEED_FORWARD_RIGHT_MOTOR);
+
 		Constants.LEFT_MOTOR.forward();
 		Constants.RIGHT_MOTOR.forward();
+
 		while (!suppressed){
 			Thread.yield();
 		}
 		Constants.LEFT_MOTOR.stop();
 		Constants.RIGHT_MOTOR.stop();
+
 	}
 
 	@Override

@@ -11,26 +11,28 @@ public class RotateRight extends Rotate implements Behavior{
 	
 	@Override
 	public boolean takeControl() {
-		return Variables.turn && (Variables.whereToTurn == TURN.RIGHT_1 || Variables.whereToTurn == TURN.RIGHT_2);
+		return Variables.turn && 
+				(Variables.state == Constants.STATE.FAR_RIGHT || Variables.state == Constants.STATE.MEDIUM_RIGHT ||
+				Variables.state == Constants.STATE.NEARBY_RIGHT || Variables.state == Constants.STATE.UP_RIGHT);
 	}
 
 	@Override
 	public void action() {
 		//Seteo variables
-		Variables.turn = false;
 		cs.resetCartesianZero();
 		
 		switch(Variables.state){
-		case FAR_RIGHT:
-		case MEDIUM_RIGHT:
-			rotate1(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
-			break;
-			
-		case NEARBY_RIGHT:
-		case UP_RIGHT:
-			rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
-			break;
-	}
+			case FAR_RIGHT:
+			case MEDIUM_RIGHT:
+				rotate1(Constants.RIGHT_MOTOR, Constants.LEFT_MOTOR);
+				break;
+				
+			case NEARBY_RIGHT:
+			case UP_RIGHT:
+				rotate2(Constants.RIGHT_MOTOR, Constants.LEFT_MOTOR);
+				break;
+		}
+		Variables.turn = false;
 
 	}
 
