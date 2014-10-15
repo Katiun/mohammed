@@ -28,7 +28,6 @@ public class Init {
 		RotateLeft rotateLeft = new RotateLeft(cs);
 		RotateRight rotateRight = new RotateRight(cs);
 		Sholve sholve = new Sholve(ir, pilot);
-//		Shoter shoter = new Shoter();
 		
 		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight};
 		
