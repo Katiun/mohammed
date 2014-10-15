@@ -12,12 +12,13 @@ public class Init {
 
 	public static void main(String[] args){
 		
-		Delay.msDelay(5000);
-		
 		//Inicializacion de variables
 		Variables.turn = false;
 		Variables.whereToTurn = TURN.LEFT_2;
 		Variables.state = Constants.STATE.FAR_LEFT;
+		Shot.getInstance();
+		
+		Delay.msDelay(5000);
 		
 		CompassHTSensor cs = new CompassHTSensor(SensorPort.S3);
 		CompassPilot pilot = new CompassPilot(cs, 56f, 136f, Motor.A, Motor.B);
