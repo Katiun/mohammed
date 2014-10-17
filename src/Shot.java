@@ -19,42 +19,36 @@ public class Shot {
 	
 	private static Shot instance = null;
 	private RS485Connection connection = null;
-	private DataInputStream dis = null;
     private DataOutputStream dos = null;
 
     private void sendInt(int msg){
     	
     	try{
-	        dos.writeInt(0);
+	        dos.writeInt(msg);
 	        dos.flush();
     	}catch(Exception ex){
         	System.out.println(ex);
         }
     }
     
+    private void connect(){
+		try {
+			connection = RS485.connect(NAME, NXTConnection.PACKET);
+			if (connection == null){
+				System.out.println("Error al conectar");
+				Delay.msDelay(5000);
+				System.exit(1);
+			}
+	        dos = connection.openDataOutputStream();
+		} catch (Exception e) {
+			System.out.println("Error al crear shot");
+			Delay.msDelay(2000);
+		}
+    	
+    }
     
 	private Shot() {
-//		try {
-////			Delay.msDelay(3000);
-//	
-//			connection = RS485.connect(NAME, NXTConnection.PACKET);
-////			Delay.msDelay(3000);
-//			
-//			if (connection == null){
-//				System.out.println("Error al conectar");
-//				Delay.msDelay(5000);
-//				System.exit(1);
-//			}
-////			Delay.msDelay(3000);
-//				
-//			dis = connection.openDataInputStream();
-//	        dos = connection.openDataOutputStream();
-////			Delay.msDelay(3000);
-//		} catch (Exception e) {
-//			System.out.println("Error al crear shot");
-//			Delay.msDelay(2000);
-//		}
-//
+		connect();
 	}
 	
 	public static Shot getInstance() {
@@ -70,7 +64,6 @@ public class Shot {
 	
 	public void close() {
         try{
-            dis.close();
             dos.close();
             connection.close();
         }catch (IOException ioe){
@@ -82,30 +75,22 @@ public class Shot {
 	
 	public void shoter(){
 		try{
-			connection = RS485.connect(NAME, NXTConnection.PACKET);
-			if (connection == null){
-				System.out.println("Error al conectar");
-				Delay.msDelay(5000);
-				System.exit(1);
-			}
-	        dos = connection.openDataOutputStream();
-
 			int msg = 0;
 			switch (Variables.state) {
 				case FAR_LEFT:
-					msg = -3;
+					msg = 3;//-3;
 					break;
 				case FAR_RIGHT:
 					msg = 3;
 					break;
 				case MEDIUM_LEFT:
-					msg = -1;
+					msg = 1;//-1;
 					break;
 				case MEDIUM_RIGHT:
 					msg = 1;				
 					break;
 				case NEARBY_LEFT:
-					msg = -2;
+					msg = 2;//-2;
 					break;
 				case NEARBY_RIGHT:
 					msg = 2;
@@ -115,16 +100,9 @@ public class Shot {
 					break;
 			}
 	        dos.writeInt(msg);
-	        dos.flush();
+//	        dos.flush();
 		} catch(Exception ioe){
-			System.out.println(ioe);
-		}finally{
-			try{
-				dos.close();
-				connection.close();
-			}catch(Exception ex){
-				System.out.println(ex);
-			}
+			System.out.println("Error al enviar datos");
 		}
 	}
 }
