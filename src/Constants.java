@@ -20,7 +20,7 @@ public class Constants {
 	public final static int SPEED_FAST_SPIN = 400;
 	public final static int SPEED_SLOW_SPIN = 0;
 	public final static int SPEED_BACWARD = 200;
-	public final static long TIME_BACKWARD = 1000; //1 segundos
+	public final static long TIME_BACKWARD = 2000; //1 segundos
 //	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public enum STATE{

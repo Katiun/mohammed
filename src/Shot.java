@@ -12,53 +12,49 @@ import lejos.util.Delay;
 public class Shot {
 
 	private static final String NAME = "NXT";
-	private static final int STOP = 0;
-	private static final int MEDIUM = 1;
-	private static final int SLOW = 2;
-	private static final int HIGH = 3;
+	private final int STOP = 0;
+	private final int MEDIUM = 1;
+	private final int SLOW = 2;
+	private final int HIGH = 3;
 	
 	private static Shot instance = null;
 	private RS485Connection connection = null;
 	private DataInputStream dis = null;
     private DataOutputStream dos = null;
 
-    private void sendInt(int msg) throws IOException {
+    private void sendInt(int msg){
+    	
     	try{
-    		if (dos == null){
-    			System.out.println("DOS ES NULL");
-    		}
-    		System.out.println(msg);
-    		Delay.msDelay(4000);
-	        dos.writeInt(msg);
+	        dos.writeInt(0);
 	        dos.flush();
     	}catch(Exception ex){
-    		System.out.println("SI " + ex.getMessage());
-    	}
+        	System.out.println(ex);
+        }
     }
     
     
 	private Shot() {
-		try {
-//			Delay.msDelay(3000);
-	
-			RS485Connection connection = RS485.connect(NAME, NXTConnection.PACKET);
-//			Delay.msDelay(3000);
-			
-			if (connection == null){
-				System.out.println("Error al conectar");
-				Delay.msDelay(5000);
-				System.exit(1);
-			}
-//			Delay.msDelay(3000);
-				
-			dis = connection.openDataInputStream();
-	        dos = connection.openDataOutputStream();
-//			Delay.msDelay(3000);
-		} catch (Exception e) {
-			System.out.println("Error al crear shot");
-			Delay.msDelay(2000);
-		}
-
+//		try {
+////			Delay.msDelay(3000);
+//	
+//			connection = RS485.connect(NAME, NXTConnection.PACKET);
+////			Delay.msDelay(3000);
+//			
+//			if (connection == null){
+//				System.out.println("Error al conectar");
+//				Delay.msDelay(5000);
+//				System.exit(1);
+//			}
+////			Delay.msDelay(3000);
+//				
+//			dis = connection.openDataInputStream();
+//	        dos = connection.openDataOutputStream();
+////			Delay.msDelay(3000);
+//		} catch (Exception e) {
+//			System.out.println("Error al crear shot");
+//			Delay.msDelay(2000);
+//		}
+//
 	}
 	
 	public static Shot getInstance() {
@@ -71,37 +67,6 @@ public class Shot {
 	}
 	
 
-	public void shotStop() {
-        try{
-        	sendInt(STOP);
-        }catch (IOException ioe){
-            LCD.drawString("Stop Exception", 0, 0);
-        }
-	}
-	
-	public void shotSlow() {
-        try{
-        	sendInt(SLOW);
-        }catch (IOException ioe){
-            LCD.drawString("shotSlow Exception", 0, 0);
-        }
-	}
-
-	public void shotMedium() {
-        try{
-        	sendInt(MEDIUM);
-        }catch (IOException ioe){
-            LCD.drawString("shotMedium Exception", 0, 0);
-        }
-	}
-	
-	public void shotHigh() {
-        try{
-        	sendInt(HIGH);
-        }catch (IOException ioe){
-            System.out.println("shotHigh Exception");
-        }
-	}
 	
 	public void close() {
         try{
@@ -117,31 +82,49 @@ public class Shot {
 	
 	public void shoter(){
 		try{
+			connection = RS485.connect(NAME, NXTConnection.PACKET);
+			if (connection == null){
+				System.out.println("Error al conectar");
+				Delay.msDelay(5000);
+				System.exit(1);
+			}
+	        dos = connection.openDataOutputStream();
+
+			int msg = 0;
 			switch (Variables.state) {
 				case FAR_LEFT:
-					sendInt((-1) * HIGH);
+					msg = -3;
 					break;
 				case FAR_RIGHT:
-					sendInt(HIGH);
+					msg = 3;
 					break;
 				case MEDIUM_LEFT:
-					sendInt((-1) * MEDIUM);
+					msg = -1;
 					break;
 				case MEDIUM_RIGHT:
-					sendInt(MEDIUM);				
+					msg = 1;				
 					break;
 				case NEARBY_LEFT:
-					sendInt((-1) * SLOW);
+					msg = -2;
 					break;
 				case NEARBY_RIGHT:
-					sendInt(SLOW);
+					msg = 2;
 					break;
 				default:
-					sendInt(STOP);
+					msg = 0;
 					break;
 			}
-		} catch(IOException ioe){
-			System.out.println("SH " + ioe.getMessage());
+	        dos.writeInt(msg);
+	        dos.flush();
+		} catch(Exception ioe){
+			System.out.println(ioe);
+		}finally{
+			try{
+				dos.close();
+				connection.close();
+			}catch(Exception ex){
+				System.out.println(ex);
+			}
 		}
 	}
 }
