@@ -31,12 +31,24 @@ public class Shot {
         	System.out.println(ex);
         }
     }
-    
+
+    private void connect(){
+    	System.out.println("Pidiendo conexion");
+		connection = RS485.connect(NAME, NXTConnection.PACKET);
+//		Delay.msDelay(3000);
+		
+		if (connection == null){
+			System.out.println("Error al conectar");
+			Delay.msDelay(5000);
+			System.exit(1);
+		}
+    }
     
 	private Shot() {
-//		try {
-////			Delay.msDelay(3000);
-//	
+		try {
+//			Delay.msDelay(3000);
+
+			connect();
 //			connection = RS485.connect(NAME, NXTConnection.PACKET);
 ////			Delay.msDelay(3000);
 //			
@@ -50,11 +62,11 @@ public class Shot {
 //			dis = connection.openDataInputStream();
 //	        dos = connection.openDataOutputStream();
 ////			Delay.msDelay(3000);
-//		} catch (Exception e) {
-//			System.out.println("Error al crear shot");
-//			Delay.msDelay(2000);
-//		}
-//
+		} catch (Exception e) {
+			System.out.println("Error al crear shot");
+			Delay.msDelay(2000);
+		}
+
 	}
 	
 	public static Shot getInstance() {
@@ -68,29 +80,21 @@ public class Shot {
 	
 
 	
-	public void close() {
-        try{
-            dis.close();
-            dos.close();
-            connection.close();
-        }catch (IOException ioe){
-        	LCD.clear();
-            LCD.drawString("Close Exception", 0, 0);
-            LCD.refresh();
-        }
-	}
-	
 	public void shoter(){
 		try{
-			connection = RS485.connect(NAME, NXTConnection.PACKET);
-			if (connection == null){
-				System.out.println("Error al conectar");
-				Delay.msDelay(5000);
-				System.exit(1);
-			}
-	        dos = connection.openDataOutputStream();
+//			connection = RS485.connect(NAME, NXTConnection.PACKET);
+//			if (connection == null){
+//				System.out.println("Error al conectar");
+//				Delay.msDelay(5000);
+//				System.exit(1);
+//			}
+//	        dos = connection.openDataOutputStream();
 
-			int msg = 0;
+			if (connection == null){
+				connect();
+			}
+			
+			byte msg = 0;
 			switch (Variables.state) {
 				case FAR_LEFT:
 					msg = -3;
@@ -114,17 +118,27 @@ public class Shot {
 					msg = 0;
 					break;
 			}
-	        dos.writeInt(msg);
-	        dos.flush();
+			
+			System.out.println("to send msg: " + msg);
+			byte[] sendMsg = {msg};
+			connection.write(sendMsg, sendMsg.length);
+			System.out.println("Send msg: " + msg);
+//	        dos.writeInt(msg);
+//	        dos.flush();
 		} catch(Exception ioe){
 			System.out.println(ioe);
-		}finally{
 			try{
-				dos.close();
 				connection.close();
-			}catch(Exception ex){
-				System.out.println(ex);
+			}finally{
+				connection = null;
 			}
+//		}finally{
+//			try{
+//				dos.close();
+//				connection.close();
+//			}catch(Exception ex){
+//				System.out.println(ex);
+//			}
 		}
 	}
 }
