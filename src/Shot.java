@@ -78,19 +78,19 @@ public class Shot {
 			int msg = 0;
 			switch (Variables.state) {
 				case FAR_LEFT:
-					msg = 3;//-3;
+					msg = -3;
 					break;
 				case FAR_RIGHT:
 					msg = 3;
 					break;
 				case MEDIUM_LEFT:
-					msg = 1;//-1;
+					msg = -1;
 					break;
 				case MEDIUM_RIGHT:
 					msg = 1;				
 					break;
 				case NEARBY_LEFT:
-					msg = 2;//-2;
+					msg = -2;
 					break;
 				case NEARBY_RIGHT:
 					msg = 2;
@@ -100,7 +100,7 @@ public class Shot {
 					break;
 			}
 	        dos.writeInt(msg);
-//	        dos.flush();
+	        dos.flush();
 		} catch(Exception ioe){
 			System.out.println("Error al enviar datos");
 		}
