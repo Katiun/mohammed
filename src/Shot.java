@@ -19,36 +19,54 @@ public class Shot {
 	
 	private static Shot instance = null;
 	private RS485Connection connection = null;
+	private DataInputStream dis = null;
     private DataOutputStream dos = null;
 
     private void sendInt(int msg){
     	
     	try{
-	        dos.writeInt(msg);
+	        dos.writeInt(0);
 	        dos.flush();
     	}catch(Exception ex){
         	System.out.println(ex);
         }
     }
-    
+
     private void connect(){
+    	System.out.println("Pidiendo conexion");
+		connection = RS485.connect(NAME, NXTConnection.PACKET);
+//		Delay.msDelay(3000);
+		
+		if (connection == null){
+			System.out.println("Error al conectar");
+			Delay.msDelay(5000);
+			System.exit(1);
+		}
+    }
+    
+	private Shot() {
 		try {
-			connection = RS485.connect(NAME, NXTConnection.PACKET);
-			if (connection == null){
-				System.out.println("Error al conectar");
-				Delay.msDelay(5000);
-				System.exit(1);
-			}
-	        dos = connection.openDataOutputStream();
+//			Delay.msDelay(3000);
+
+			connect();
+//			connection = RS485.connect(NAME, NXTConnection.PACKET);
+////			Delay.msDelay(3000);
+//			
+//			if (connection == null){
+//				System.out.println("Error al conectar");
+//				Delay.msDelay(5000);
+//				System.exit(1);
+//			}
+////			Delay.msDelay(3000);
+//				
+//			dis = connection.openDataInputStream();
+//	        dos = connection.openDataOutputStream();
+////			Delay.msDelay(3000);
 		} catch (Exception e) {
 			System.out.println("Error al crear shot");
 			Delay.msDelay(2000);
 		}
-    	
-    }
-    
-	private Shot() {
-		connect();
+
 	}
 	
 	public static Shot getInstance() {
@@ -62,20 +80,21 @@ public class Shot {
 	
 
 	
-	public void close() {
-        try{
-            dos.close();
-            connection.close();
-        }catch (IOException ioe){
-        	LCD.clear();
-            LCD.drawString("Close Exception", 0, 0);
-            LCD.refresh();
-        }
-	}
-	
 	public void shoter(){
 		try{
-			int msg = 0;
+//			connection = RS485.connect(NAME, NXTConnection.PACKET);
+//			if (connection == null){
+//				System.out.println("Error al conectar");
+//				Delay.msDelay(5000);
+//				System.exit(1);
+//			}
+//	        dos = connection.openDataOutputStream();
+
+			if (connection == null){
+				connect();
+			}
+			
+			byte msg = 0;
 			switch (Variables.state) {
 				case FAR_LEFT:
 					msg = -3;
@@ -102,7 +121,12 @@ public class Shot {
 	        dos.writeInt(msg);
 	        dos.flush();
 		} catch(Exception ioe){
-			System.out.println("Error al enviar datos");
+			System.out.println(ioe);
+			try{
+				connection.close();
+			}finally{
+				connection = null;
+			}
 		}
 	}
 }
