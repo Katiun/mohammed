@@ -15,12 +15,12 @@ public class Constants {
 	public final static int SPEED_FORWARD_LEFT_MOTOR = 344;
 	public final static int SPEED_FORWARD_RIGHT_MOTOR = 340;
 	
-	public final static int ANGLE_ROTATE1 = 140;
-	public final static int ANGLE_ROTATE2 = 230;
-	public final static int SPEED_FAST_SPIN = 400;
-	public final static int SPEED_SLOW_SPIN = 0;
+	public final static int ANGLE_ROTATE1 = 180;
+	public final static int ANGLE_ROTATE2 = 270;
+	public final static int SPEED_FAST_SPIN = 450;
+	public final static int SPEED_SLOW_SPIN = 50;
 	public final static int SPEED_BACWARD = 200;
-	public final static long TIME_BACKWARD = 2000; //1 segundos
+	public final static long TIME_BACKWARD = 1000; //1 segundos
 //	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public enum STATE{
@@ -28,16 +28,16 @@ public class Constants {
 		FAR_LEFT_ROTATING,
 		MEDIUM_RIGHT,
 		MEDIUM_RIGHT_ROTATING,
-		NEARBY_RIGHT,
-		NEARBY_RIGHT_ROTATING,
+		NEARBY_LEFT,
+		NEARBY_LEFT_ROTATING,
 		UP_LEFT,
 		UP_LEFT_ROTATING,
 		FAR_RIGHT,
 		FAR_RIGHT_ROTATING,
 		MEDIUM_LEFT,
 		MEDIUM_LEFT_ROTATING,
-		NEARBY_LEFT,
-		NEARBY_LEFT_ROTATING,
+		NEARBY_RIGHT,
+		NEARBY_RIGHT_ROTATING,
 		UP_RIGHT,
 		UP_RIGHT_ROTATING
 		;

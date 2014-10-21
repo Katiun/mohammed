@@ -78,6 +78,13 @@ public class Rotate {
 	 */
 	protected void rotate2(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut){
 		
+		motorIn.setSpeed(Constants.SPEED_BACWARD);
+		motorOut.setSpeed(Constants.SPEED_BACWARD);
+		motorIn.backward();
+		motorOut.backward();
+
+		Delay.msDelay(Constants.TIME_BACKWARD);
+
 		rotate(motorIn, motorOut, Constants.ANGLE_ROTATE2);
 //		//Cambio el estado para pasarlo al estado de giro
 //		Variables.state = Constants.STATE.getNextState(Variables.state.ordinal());
@@ -140,10 +147,11 @@ public class Rotate {
 		//Aviso al shoter
 		Shot.getInstance().shoter();
 		
+		cs.resetCartesianZero();
 		float initialDegrees = cs.getDegreesCartesian();
-		if (initialDegrees > 180){
-			initialDegrees -= 360;
-		}
+//		if (initialDegrees > 180){
+//			initialDegrees -= 360;
+//		}
 		float readDegrees = initialDegrees;
 		float lastReadDegrees = readDegrees;
 		int changeDegreesCount = 0;
@@ -157,12 +165,23 @@ public class Rotate {
 		//Giro 1
 		motorIn.forward();
 		motorOut.backward();
+		float originalReadDegrees;
 		
 		while (changeDegreesCount < angleRotate){
 			readDegrees = cs.getDegreesCartesian();
+			originalReadDegrees = readDegrees;
 			if (readDegrees != lastReadDegrees){
-				lastReadDegrees = readDegrees;
-				changeDegreesCount++;
+				if (Math.abs(readDegrees - lastReadDegrees) > 180){
+					if (readDegrees > lastReadDegrees){
+						readDegrees = 360 - readDegrees;
+					}else{
+						lastReadDegrees = 360 - lastReadDegrees;
+					}
+					changeDegreesCount += Math.abs(readDegrees + lastReadDegrees);
+				}else{
+					changeDegreesCount += Math.abs(readDegrees - lastReadDegrees);
+				}
+				lastReadDegrees = originalReadDegrees;
 			}
 		}
 		motorIn.stop();

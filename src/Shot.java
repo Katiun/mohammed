@@ -73,16 +73,16 @@ public class Shot {
 					msg = 3;
 					break;
 				case MEDIUM_LEFT:
-					msg = -1;
-					break;
-				case MEDIUM_RIGHT:
-					msg = 1;				
-					break;
-				case NEARBY_LEFT:
 					msg = -2;
 					break;
+				case MEDIUM_RIGHT:
+					msg = 2;				
+					break;
+				case NEARBY_LEFT:
+					msg = -1;
+					break;
 				case NEARBY_RIGHT:
-					msg = 2;
+					msg = 1;
 					break;
 				default:
 					msg = 0;
