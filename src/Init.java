@@ -13,15 +13,10 @@ public class Init {
 	public static void main(String[] args){
 		
 		//Inicializacion de variables
-		Variables.turn = false;
-		Variables.whereToTurn = TURN.LEFT_2;
-		Variables.state = Constants.STATE.FAR_LEFT;
-		Shot.getInstance();
-		
-		Delay.msDelay(5000);
+		init();
 		
 		CompassHTSensor cs = new CompassHTSensor(SensorPort.S3);
-		CompassPilot pilot = new CompassPilot(cs, 56f, 136f, Motor.A, Motor.B);
+		CompassPilot pilot = new CompassPilot(cs, 56f, 136f, Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
 		OpticalDistanceSensor ir = new OpticalDistanceSensor(SensorPort.S2);
 		
 		Forward forward = new Forward(cs, pilot, ir);
@@ -45,5 +40,23 @@ public class Init {
 //		Motor.A.stop();
 //		Motor.B.stop();
 	}
-	
+
+	private static void init(){
+
+		Variables.turn = false;
+		Variables.whereToTurn = TURN.LEFT_2;
+		Variables.state = Constants.STATE.FAR_LEFT;
+		
+		Delay.msDelay(2000);
+
+		Constants.SHOLVE_MOTOR.setSpeed(Constants.SPEED_SHOLVE);
+		Constants.SHOLVE_MOTOR.rotateTo(-Constants.ANGLE_SHOLVE);
+		Constants.SHOLVE_MOTOR.stop();
+		Constants.SHOLVE_MOTOR.resetTachoCount();
+
+		Delay.msDelay(3000);
+
+		Shot.getInstance();
+		
+	}
 }

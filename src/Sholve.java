@@ -24,20 +24,42 @@ public class Sholve implements Behavior{
 	@Override
 	public void action() {
 		// TODO Auto-generated method stub
+//		Constants.RIGHT_MOTOR.stop();
+//		Constants.LEFT_MOTOR.stop();
 		pilot.stop();
+
+//		Constants.RIGHT_MOTOR.backward();
+//		Constants.LEFT_MOTOR.backward();
 		pilot.backward();
 		Delay.msDelay(500);
+
+//		Constants.RIGHT_MOTOR.stop();
+//		Constants.LEFT_MOTOR.stop();
 		pilot.stop();
+
 		Constants.SHOLVE_MOTOR.setSpeed(Constants.SPEED_SHOLVE);
 		Constants.SHOLVE_MOTOR.rotateTo(Constants.ANGLE_SHOLVE);
 		Constants.SHOLVE_MOTOR.rotateTo(0);
 		Constants.SHOLVE_MOTOR.stop();
+
+//		Constants.RIGHT_MOTOR.forward();
+//		Constants.LEFT_MOTOR.forward();
 		pilot.forward();
 		Delay.msDelay(550);
+
+//		Constants.RIGHT_MOTOR.stop();
+//		Constants.LEFT_MOTOR.stop();
 		pilot.stop();
+
+//		Constants.RIGHT_MOTOR.backward();
+//		Constants.LEFT_MOTOR.backward();
 		pilot.backward();
 		Delay.msDelay(550);
+
+//		Constants.RIGHT_MOTOR.stop();
+//		Constants.LEFT_MOTOR.stop();
 		pilot.stop();
+
 		Constants.SHOLVE_MOTOR.setSpeed(Constants.SPEED_SHOLVE);
 		Constants.SHOLVE_MOTOR.rotateTo(Constants.ANGLE_SHOLVE);
 

@@ -29,7 +29,7 @@ public class RotateRight extends Rotate implements Behavior{
 				
 			case NEARBY_RIGHT:
 			case UP_RIGHT:
-				rotate2(Constants.RIGHT_MOTOR, Constants.LEFT_MOTOR);
+				rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
 				break;
 		}
 		Variables.turn = false;
