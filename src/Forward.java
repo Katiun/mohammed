@@ -1,18 +1,13 @@
-import lejos.nxt.LCD;
-import lejos.nxt.Motor;
-import lejos.nxt.SensorPort;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.robotics.navigation.CompassPilot;
 import lejos.robotics.subsumption.Behavior;
-import lejos.util.Delay;
 
 
 public class Forward implements Behavior{
 
 	private CompassHTSensor cs;
 	private CompassPilot pilot;
-	private boolean moving;
 	private OpticalDistanceSensor ir;
 	private boolean suppressed = false;
 	
@@ -21,8 +16,6 @@ public class Forward implements Behavior{
 		this.cs = cs;
 		this.pilot = pilot;
 		this.ir = ir;
-		moving = false;
-		System.out.println("Construyo Forward");
 	}
 
 	@Override
@@ -52,8 +45,21 @@ public class Forward implements Behavior{
 //	        Thread.yield();
 //		}
 //		pilot.stop();
-		Constants.LEFT_MOTOR.setSpeed(Constants.SPEED_FORWARD_LEFT_MOTOR);
-		Constants.RIGHT_MOTOR.setSpeed(Constants.SPEED_FORWARD_RIGHT_MOTOR);
+		if ((Variables.state == Constants.STATE.FAR_LEFT) || (Variables.state == Constants.STATE.NEARBY_RIGHT)
+				|| (Variables.state == Constants.STATE.UP_RIGHT)){
+			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD_FAST;
+			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD;
+		}else if ((Variables.state == Constants.STATE.NEARBY_LEFT) || (Variables.state == Constants.STATE.UP_LEFT)
+				|| (Variables.state == Constants.STATE.FAR_RIGHT)){
+			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;
+			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD_FAST;
+		}else{
+			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;
+			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD;
+		}
+
+		Constants.LEFT_MOTOR.setSpeed(Variables.SPEED_FORWARD_LEFT_MOTOR);
+		Constants.RIGHT_MOTOR.setSpeed(Variables.SPEED_FORWARD_RIGHT_MOTOR);
 
 		Constants.LEFT_MOTOR.forward();
 		Constants.RIGHT_MOTOR.forward();

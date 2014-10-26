@@ -1,9 +1,10 @@
 import lejos.nxt.NXTRegulatedMotor;
 import lejos.nxt.addon.CompassHTSensor;
+import lejos.robotics.subsumption.Behavior;
 import lejos.util.Delay;
 
 
-public class Rotate {
+public abstract class Rotate implements Behavior {
 
 	CompassHTSensor cs;
 
@@ -23,14 +24,6 @@ public class Rotate {
 	 * @param motorOut Es el de más afuera en el giro
 	 */
 	protected void rotate2(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut){
-		
-		motorIn.setSpeed(Constants.SPEED_BACWARD);
-		motorOut.setSpeed(Constants.SPEED_BACWARD);
-		motorIn.backward();
-		motorOut.backward();
-
-		Delay.msDelay(Constants.TIME_BACKWARD);
-
 		rotate(motorIn, motorOut, Constants.ANGLE_ROTATE2, Constants.SPEED_SLOW_SPIN2, Constants.SPEED_FAST_SPIN);
 	}
 
@@ -44,9 +37,7 @@ public class Rotate {
 		
 		cs.resetCartesianZero();
 		float initialDegrees = cs.getDegreesCartesian();
-//		if (initialDegrees > 180){
-//			initialDegrees -= 360;
-//		}
+
 		float readDegrees = initialDegrees;
 		float lastReadDegrees = readDegrees;
 		int changeDegreesCount = 0;
@@ -93,8 +84,8 @@ public class Rotate {
 		motorIn.stop();
 		motorOut.stop();
 
-		Constants.SHOLVE_MOTOR.rotateTo(0);
-		Constants.SHOLVE_MOTOR.stop();
+		Constants.SHOVEL_MOTOR.rotateTo(0);
+		Constants.SHOVEL_MOTOR.stop();
 
 		//Cambio el estado para pasarlo al estado de giro
 		Variables.state = Constants.STATE.getNextState(Variables.state.ordinal());
@@ -103,4 +94,14 @@ public class Rotate {
 		Shot.getInstance().shoter();
 		
 	}
+
+	@Override
+	public abstract boolean takeControl();
+
+	@Override
+	public abstract void action();
+
+	@Override
+	public abstract void suppress();
+
 }

@@ -1,8 +1,10 @@
 import lejos.nxt.addon.CompassHTSensor;
+import lejos.nxt.addon.NXTLineLeader.Command;
 import lejos.robotics.subsumption.Behavior;
+import lejos.util.Delay;
 
 
-public class RotateRight extends Rotate implements Behavior{
+public class RotateRight extends Rotate{
 
 	
 	public RotateRight(CompassHTSensor cs){
@@ -18,8 +20,6 @@ public class RotateRight extends Rotate implements Behavior{
 
 	@Override
 	public void action() {
-		//Seteo variables
-		cs.resetCartesianZero();
 		
 		switch(Variables.state){
 			case FAR_RIGHT:
@@ -29,6 +29,13 @@ public class RotateRight extends Rotate implements Behavior{
 				
 			case NEARBY_RIGHT:
 			case UP_RIGHT:
+				Constants.LEFT_MOTOR.setSpeed(Constants.SPEED_BACWARD);
+				Constants.RIGHT_MOTOR.setSpeed(Constants.SPEED_BACWARD);
+				Constants.LEFT_MOTOR.backward();
+				Constants.RIGHT_MOTOR.backward();
+
+				Delay.msDelay(Constants.TIME_BACKWARD);
+
 				rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
 				break;
 		}

@@ -1,4 +1,3 @@
-import lejos.nxt.Motor;
 import lejos.nxt.SensorPort;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.nxt.addon.OpticalDistanceSensor;
@@ -22,7 +21,7 @@ public class Init {
 		Forward forward = new Forward(cs, pilot, ir);
 		RotateLeft rotateLeft = new RotateLeft(cs);
 		RotateRight rotateRight = new RotateRight(cs);
-		Sholve sholve = new Sholve(ir, pilot);
+		Shovel sholve = new Shovel(ir, pilot);
 //		Shoter shoter = new Shoter();
 		
 		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight};
@@ -44,15 +43,14 @@ public class Init {
 	private static void init(){
 
 		Variables.turn = false;
-		Variables.whereToTurn = TURN.LEFT_2;
 		Variables.state = Constants.STATE.FAR_LEFT;
 		
 		Delay.msDelay(2000);
 
-		Constants.SHOLVE_MOTOR.setSpeed(Constants.SPEED_SHOLVE);
-		Constants.SHOLVE_MOTOR.rotateTo(-Constants.ANGLE_SHOLVE);
-		Constants.SHOLVE_MOTOR.stop();
-		Constants.SHOLVE_MOTOR.resetTachoCount();
+		Constants.SHOVEL_MOTOR.setSpeed(Constants.SPEED_SHOVEL);
+		Constants.SHOVEL_MOTOR.rotateTo(-Constants.ANGLE_SHOVEL);
+		Constants.SHOVEL_MOTOR.stop();
+		Constants.SHOVEL_MOTOR.resetTachoCount();
 
 		Delay.msDelay(3000);
 
