@@ -24,6 +24,8 @@ public class Constants {
 	
 	public final static int SPEED_FORWARD = 500;
 	public final static int SPEED_FORWARD_FAST = 502;
+
+	public final static int DELTA_DISTANCE = 200;
 	
 	public enum STATE{
 		FAR_LEFT,
