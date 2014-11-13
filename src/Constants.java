@@ -19,13 +19,15 @@ public class Constants {
 	public final static int SPEED_SLOW_SPIN1 = 120;
 	public final static int SPEED_SLOW_SPIN2 = 10;
 	public final static int SPEED_BACWARD = 200;
-	public final static long TIME_BACKWARD = 1000; //1 segundos
+	public final static long TIME_BACKWARD = 400; //1 segundos
 //	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public final static int SPEED_FORWARD = 500;
 	public final static int SPEED_FORWARD_FAST = 502;
 
-	public final static int DELTA_DISTANCE = 200;
+	public final static int SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT = 350;
+	public final static int SAFE_LONG_DISTANCE_ANOTHER_AGENT = 500;
+	public final static int DELTA_DISTANCE = 100;
 	
 	public enum STATE{
 		FAR_LEFT,

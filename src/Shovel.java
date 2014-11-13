@@ -8,14 +8,14 @@ import lejos.util.Delay;
 
 public class Shovel implements Behavior{
 
-	OpticalDistanceSensor ir;
+	OpticalDistanceSensor mediumInfraRed;
 	CompassPilot pilot;
 	private boolean enterErrorZone;
 	private int second;
 	int distance;
 	
-	public Shovel(OpticalDistanceSensor ir, CompassPilot pilot){
-		this.ir = ir;
+	public Shovel(OpticalDistanceSensor mediumInfraRed, CompassPilot pilot){
+		this.mediumInfraRed = mediumInfraRed;
 		this.pilot = pilot;
 		enterErrorZone = false;
 	}
@@ -41,7 +41,7 @@ public class Shovel implements Behavior{
 //				}
 //			}
 //		}
-		return ir.getDistance() < Constants.DISTANCE_SHOVEL && !Variables.turn;
+		return mediumInfraRed.getDistance() < Constants.DISTANCE_SHOVEL && !Variables.turn;
 	}
 
 	@Override

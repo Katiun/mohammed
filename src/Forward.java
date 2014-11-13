@@ -8,14 +8,14 @@ public class Forward implements Behavior{
 
 	private CompassHTSensor cs;
 	private CompassPilot pilot;
-	private OpticalDistanceSensor ir;
+	private OpticalDistanceSensor mediumInfraRed;
 	private boolean suppressed = false;
 	
 
-	public Forward(CompassHTSensor cs, CompassPilot pilot, OpticalDistanceSensor ir) {
+	public Forward(CompassHTSensor cs, CompassPilot pilot, OpticalDistanceSensor mediumInfraRed) {
 		this.cs = cs;
 		this.pilot = pilot;
-		this.ir = ir;
+		this.mediumInfraRed = mediumInfraRed;
 	}
 
 	@Override
@@ -53,6 +53,12 @@ public class Forward implements Behavior{
 				|| (Variables.state == Constants.STATE.FAR_RIGHT)){
 			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;
 			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD_FAST;
+		}else if (Variables.state == Constants.STATE.MEDIUM_RIGHT){
+			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;
+			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD + 2;
+		}else if (Variables.state == Constants.STATE.MEDIUM_LEFT){
+			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD + 2;
+			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD;
 		}else{
 			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;
 			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD;

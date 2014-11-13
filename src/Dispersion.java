@@ -5,32 +5,31 @@ import lejos.robotics.subsumption.Behavior;
 
 
 
-public class Avoid implements Behavior{
+public class Dispersion implements Behavior{
 
 	private CompassPilot pilot;
-	private OpticalDistanceSensor ir;
+	private OpticalDistanceSensor mediumInfraRed;
 	private OpticalDistanceSensor irMax;
 
-	public Avoid(CompassPilot pilot, OpticalDistanceSensor ir, OpticalDistanceSensor irMax) {
+	public Dispersion(CompassPilot pilot, OpticalDistanceSensor mediumInfraRed, OpticalDistanceSensor longInfraRed) {
 		super();
 		this.pilot = pilot;
-		this.ir = ir;
-		this.irMax = irMax;
+		this.mediumInfraRed = mediumInfraRed;
+		this.irMax = longInfraRed;
 		
 	}
 
 	@Override
 	public boolean takeControl() {
-		int dist1 = ir.getDistance();
+		int dist1 = mediumInfraRed.getDistance();
 		int dist2 = irMax.getDistance();
-		System.out.println("dist1 = " + dist1);
-		System.out.println("dist2 = " + dist2);
-		return Math.abs(dist1 - dist2) > Constants.DELTA_DISTANCE;
+		return Variables.dispersion && dist1 > Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT && Math.abs(dist1 - dist2) < Constants.DELTA_DISTANCE;
 	}
 
 	@Override
 	public void action() {
 		pilot.stop();
+		Variables.dispersion = false;
 	}
 
 	@Override

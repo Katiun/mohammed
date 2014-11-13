@@ -16,16 +16,17 @@ public class Init {
 		
 		CompassHTSensor cs = new CompassHTSensor(SensorPort.S3);
 		CompassPilot pilot = new CompassPilot(cs, 56f, 136f, Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
-		OpticalDistanceSensor ir = new OpticalDistanceSensor(SensorPort.S2);
-		OpticalDistanceSensor irMax = new OpticalDistanceSensor(SensorPort.S1);
+		OpticalDistanceSensor mediumInfraRed = new OpticalDistanceSensor(SensorPort.S2);
+		OpticalDistanceSensor longInfraRed = new OpticalDistanceSensor(SensorPort.S1);
 		
-		Forward forward = new Forward(cs, pilot, ir);
+		Forward forward = new Forward(cs, pilot, mediumInfraRed);
 		RotateLeft rotateLeft = new RotateLeft(cs);
 		RotateRight rotateRight = new RotateRight(cs);
-		Shovel sholve = new Shovel(ir, pilot);
-		Avoid avoid = new Avoid(pilot, ir, irMax);
+		Shovel sholve = new Shovel(mediumInfraRed, pilot);
+		Agregation agregation = new Agregation(pilot, mediumInfraRed, longInfraRed);
+		Dispersion dispersion = new Dispersion(pilot, mediumInfraRed, longInfraRed);
 		
-		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight, avoid};
+		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight, agregation, dispersion};
 		
 		Arbitrator arbitor = new Arbitrator(behaviorList);
 		arbitor.start();
