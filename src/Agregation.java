@@ -21,25 +21,25 @@ public class Agregation implements Behavior{
 	
 	@Override
 	public boolean takeControl() {
-		// TODO Auto-generated method stub
 		return mediumInfraRed.getDistance() < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT && longInfraRed.getDistance() > Constants.SAFE_LONG_DISTANCE_ANOTHER_AGENT;
 	}
 
 	@Override
 	public void action() {
-		// TODO Auto-generated method stub
-//		pilot.stop();
-		Constants.LEFT_MOTOR.stop();
-		Constants.RIGHT_MOTOR.stop();
+		System.out.println("action Agr");
+		
+		System.out.println("MIR: " + mediumInfraRed.getDistance());
+		System.out.println("LIR: " + longInfraRed.getDistance());
+		Constants.stopMotors();
 		
 		Variables.dispersion = true;
 		
 		int dist = mediumInfraRed.getDistance();
-		while ((!suppressed) && (mediumInfraRed.getDistance() < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
+		while ((!suppressed) && (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
 			Sound.twoBeeps();
 			if (dist > mediumInfraRed.getDistance()){
 				pilot.forward();
-			}else if (dist < mediumInfraRed.getDistance()){
+			}else if ((dist < mediumInfraRed.getDistance()) || (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
 				pilot.backward();
 			}
 			dist = mediumInfraRed.getDistance();
@@ -50,7 +50,6 @@ public class Agregation implements Behavior{
 
 	@Override
 	public void suppress() {
-		// TODO Auto-generated method stub
 		suppressed = true;
 	}
 

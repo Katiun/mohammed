@@ -67,14 +67,20 @@ public class Forward implements Behavior{
 		Constants.LEFT_MOTOR.setSpeed(Variables.SPEED_FORWARD_LEFT_MOTOR);
 		Constants.RIGHT_MOTOR.setSpeed(Variables.SPEED_FORWARD_RIGHT_MOTOR);
 
-		Constants.LEFT_MOTOR.forward();
-		Constants.RIGHT_MOTOR.forward();
+		if (Variables.SPEED_FORWARD_LEFT_MOTOR > Variables.SPEED_FORWARD_RIGHT_MOTOR){
+			Constants.RIGHT_MOTOR.forward();
+			Constants.LEFT_MOTOR.forward();
+		}else{
+			Constants.LEFT_MOTOR.forward();
+			Constants.RIGHT_MOTOR.forward();
+		}
 
 		while (!suppressed){
 			Thread.yield();
 		}
-		Constants.LEFT_MOTOR.stop();
-		Constants.RIGHT_MOTOR.stop();
+//		Constants.LEFT_MOTOR.stop();
+//		Constants.RIGHT_MOTOR.stop();
+		Constants.stopMotors();
 
 	}
 

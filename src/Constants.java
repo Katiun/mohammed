@@ -53,4 +53,32 @@ public class Constants {
 		}
 	}
 	
+	public static void stopMotors(){
+		switch (Variables.state){
+			case FAR_LEFT:
+			case MEDIUM_LEFT:
+			case NEARBY_RIGHT:
+			case UP_RIGHT:
+			case MEDIUM_RIGHT_ROTATING:
+			case NEARBY_LEFT_ROTATING:
+			case UP_LEFT_ROTATING:
+			case FAR_RIGHT_ROTATING:
+				LEFT_MOTOR.stop(true);
+				RIGHT_MOTOR.stop();
+			break;
+
+			case FAR_RIGHT:
+			case MEDIUM_RIGHT:
+			case NEARBY_LEFT:
+			case UP_LEFT:
+			case FAR_LEFT_ROTATING:
+			case MEDIUM_LEFT_ROTATING:
+			case NEARBY_RIGHT_ROTATING:
+			case UP_RIGHT_ROTATING:
+				RIGHT_MOTOR.stop(true);
+				LEFT_MOTOR.stop();
+			break;
+		}
+	}
+	
 }

@@ -43,8 +43,9 @@ public abstract class Rotate implements Behavior {
 		int changeDegreesCount = 0;
 		
 		//Inicializo motores
-		motorIn.stop();
-		motorOut.stop();
+//		motorIn.stop();
+//		motorOut.stop();
+		Constants.stopMotors();
 		motorIn.setSpeed(slowSpeed);
 		motorOut.setSpeed(fastSpeed);
 
@@ -70,8 +71,9 @@ public abstract class Rotate implements Behavior {
 				lastReadDegrees = originalReadDegrees;
 			}
 		}
-		motorIn.stop();
-		motorOut.stop();
+//		motorIn.stop();
+//		motorOut.stop();
+		Constants.stopMotors();
 
 		//Voy para adelante
 		motorIn.setSpeed(Constants.SPEED_BACWARD);
@@ -81,8 +83,9 @@ public abstract class Rotate implements Behavior {
 
 		Delay.msDelay(Constants.TIME_BACKWARD);
 		
-		motorIn.stop();
-		motorOut.stop();
+//		motorIn.stop();
+//		motorOut.stop();
+		Constants.stopMotors();
 
 		Constants.SHOVEL_MOTOR.rotateTo(0);
 		Constants.SHOVEL_MOTOR.stop();
