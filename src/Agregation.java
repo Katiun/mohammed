@@ -26,10 +26,10 @@ public class Agregation implements Behavior{
 
 	@Override
 	public void action() {
-		System.out.println("action Agr");
+		//System.out.println("action Agr");
 		
-		System.out.println("MIR: " + mediumInfraRed.getDistance());
-		System.out.println("LIR: " + longInfraRed.getDistance());
+		//System.out.println("MIR: " + mediumInfraRed.getDistance());
+		//System.out.println("LIR: " + longInfraRed.getDistance());
 		Constants.stopMotors();
 		
 		Variables.dispersion = true;

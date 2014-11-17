@@ -13,9 +13,9 @@ public abstract class Rotate implements Behavior {
 	 * @param motorIn Es el de más adentro en el giro
 	 * @param motorOut Es el de más afuera en el giro
 	 */
-	protected void rotate1(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut){
+	protected void rotate1(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut,boolean derecha){
 		
-		rotate(motorIn, motorOut, Constants.ANGLE_ROTATE1, Constants.SPEED_SLOW_SPIN1, Constants.SPEED_FAST_SPIN);
+		rotate(motorIn, motorOut,(float) 180.0, Constants.SPEED_SLOW_SPIN1, Constants.SPEED_FAST_SPIN,derecha);
 	}
 	
 	/**
@@ -23,11 +23,11 @@ public abstract class Rotate implements Behavior {
 	 * @param motorIn Es el de más adentro en el giro
 	 * @param motorOut Es el de más afuera en el giro
 	 */
-	protected void rotate2(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut){
-		rotate(motorIn, motorOut, Constants.ANGLE_ROTATE2, Constants.SPEED_SLOW_SPIN2, Constants.SPEED_FAST_SPIN);
+	protected void rotate2(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut,boolean derecha){
+		rotate(motorIn, motorOut, (float) 270.0, Constants.SPEED_SLOW_SPIN2, Constants.SPEED_FAST_SPIN, derecha);
 	}
 
-	private void rotate(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut, int angleRotate, int slowSpeed, int fastSpeed){
+	private void rotate(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut, float angleRotate, int slowSpeed, int fastSpeed,boolean derecha){
 
 		//Cambio el estado para pasarlo al estado de giro
 		Variables.state = Constants.STATE.getNextState(Variables.state.ordinal());
@@ -38,6 +38,7 @@ public abstract class Rotate implements Behavior {
 		cs.resetCartesianZero();
 		float initialDegrees = cs.getDegreesCartesian();
 
+		System.out.println("initDeg = " + initialDegrees);
 		float readDegrees = initialDegrees;
 		float lastReadDegrees = readDegrees;
 		int changeDegreesCount = 0;
@@ -53,12 +54,17 @@ public abstract class Rotate implements Behavior {
 		motorIn.backward();
 		motorOut.backward();
 		float originalReadDegrees;
-		
-		while (changeDegreesCount < angleRotate){
+		//CAMBIOS
+		while (changeDegreesCount < 20.0){
 			readDegrees = cs.getDegreesCartesian();
 			originalReadDegrees = readDegrees;
-			if (readDegrees != lastReadDegrees){
-				if (Math.abs(readDegrees - lastReadDegrees) > 180){
+			/*System.out.println("LEO = " + readDegrees);
+			System.out.println("LEO = " + readDegrees);
+			System.out.println("VOY  = " + changeDegreesCount);
+			System.out.println("VOY  = " + changeDegreesCount);
+			*/
+			if (readDegrees != lastReadDegrees){//si cambió el valor
+				if (Math.abs(readDegrees - lastReadDegrees) > 180){//si la diferencia entre la ultima vez que lei y y la actual es mayor a 180
 					if (readDegrees > lastReadDegrees){
 						readDegrees = 360 - readDegrees;
 					}else{
@@ -70,7 +76,37 @@ public abstract class Rotate implements Behavior {
 				}
 				lastReadDegrees = originalReadDegrees;
 			}
+			
 		}
+		System.out.println("ESTA EN  = " + cs.getDegreesCartesian());
+		System.out.println("ESTA EN  = " + cs.getDegreesCartesian());
+		System.out.println("ESTA EN  = " + cs.getDegreesCartesian());
+		Delay.msDelay(400);
+		if(derecha){
+			//initialDegrees =0;
+			while(cs.getDegreesCartesian()<(angleRotate)){
+				while(cs.getDegreesCartesian()<(angleRotate)){
+					while(cs.getDegreesCartesian()<(angleRotate)){
+						while(cs.getDegreesCartesian()<(angleRotate)){
+							System.out.println("ESTA EN  = " + cs.getDegreesCartesian());
+						}
+					}
+				}
+			}
+		}else{
+			//initialDegrees=360;
+			while(cs.getDegreesCartesian()>(360.0-angleRotate)){
+				while(cs.getDegreesCartesian()>(360.0-angleRotate)){
+					while(cs.getDegreesCartesian()>(360.0-angleRotate)){
+						while(cs.getDegreesCartesian()>(360.0-angleRotate)){
+							System.out.println("2 ESTA EN  = " + cs.getDegreesCartesian());
+						}
+					}
+				}
+			}
+		}
+		
+		
 //		motorIn.stop();
 //		motorOut.stop();
 		Constants.stopMotors();
@@ -93,8 +129,13 @@ public abstract class Rotate implements Behavior {
 		//Cambio el estado para pasarlo al estado de giro
 		Variables.state = Constants.STATE.getNextState(Variables.state.ordinal());
 		
+		//System.out.println("readDeg = " + readDegrees);
+		System.out.println("FIN  = " + cs.getDegreesCartesian()+ " EN  = " + angleRotate);
+		//System.out.println("hasta   = " + angleRotate);
+		
 		//Aviso al shoter
 		Shot.getInstance().shoter();
+		//Delay.msDelay(45678);
 		
 	}
 

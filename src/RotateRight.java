@@ -24,7 +24,7 @@ public class RotateRight extends Rotate{
 		switch(Variables.state){
 			case FAR_RIGHT:
 			case MEDIUM_RIGHT:
-				rotate1(Constants.RIGHT_MOTOR, Constants.LEFT_MOTOR);
+				rotate1(Constants.RIGHT_MOTOR, Constants.LEFT_MOTOR,true);
 				break;
 				
 			case NEARBY_RIGHT:
@@ -36,7 +36,7 @@ public class RotateRight extends Rotate{
 
 				Delay.msDelay(Constants.TIME_BACKWARD);
 
-				rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR);
+				rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR,true);
 				break;
 		}
 		Variables.turn = false;

@@ -13,8 +13,10 @@ public class Constants {
 	public final static int DISTANCE_SHOVEL = 205;
 	public final static int DISTANCE_SHOVEL_ERROR = 180;
 	
+	
 	public final static int ANGLE_ROTATE1 = 180;
 	public final static int ANGLE_ROTATE2 = 270;
+	
 	public final static int SPEED_FAST_SPIN = 350;
 	public final static int SPEED_SLOW_SPIN1 = 120;
 	public final static int SPEED_SLOW_SPIN2 = 10;
