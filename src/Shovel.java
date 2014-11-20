@@ -54,9 +54,10 @@ public class Shovel implements Behavior{
 //		Constants.LEFT_MOTOR.stop();
 		pilot.stop();
 
-//		Constants.RIGHT_MOTOR.backward();
-//		Constants.LEFT_MOTOR.backward();
-		pilot.backward();
+////		Constants.RIGHT_MOTOR.backward();
+////		Constants.LEFT_MOTOR.backward();
+//		pilot.backward();
+		pilot.forward();
 		Delay.msDelay(500);
 
 //		Constants.RIGHT_MOTOR.stop();
@@ -68,18 +69,20 @@ public class Shovel implements Behavior{
 		Constants.SHOVEL_MOTOR.rotateTo(0);
 		Constants.SHOVEL_MOTOR.stop();
 
-//		Constants.RIGHT_MOTOR.forward();
-//		Constants.LEFT_MOTOR.forward();
-		pilot.forward();
+////		Constants.RIGHT_MOTOR.forward();
+////		Constants.LEFT_MOTOR.forward();
+//		pilot.forward();
+		pilot.backward();
 		Delay.msDelay(550);
 
 //		Constants.RIGHT_MOTOR.stop();
 //		Constants.LEFT_MOTOR.stop();
 		pilot.stop();
 
-//		Constants.RIGHT_MOTOR.backward();
-//		Constants.LEFT_MOTOR.backward();
-		pilot.backward();
+////		Constants.RIGHT_MOTOR.backward();
+////		Constants.LEFT_MOTOR.backward();
+//		pilot.backward();
+		pilot.forward();
 		Delay.msDelay(550);
 
 //		Constants.RIGHT_MOTOR.stop();
