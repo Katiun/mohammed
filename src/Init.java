@@ -32,11 +32,11 @@ public class Init {
 		RotateLeft rotateLeft = new RotateLeft(pilot);
 		RotateRight rotateRight = new RotateRight(pilot);
 		Shovel sholve = new Shovel(mediumInfraRed, pilot);
-//		Agregation agregation = new Agregation(pilot, mediumInfraRed, longInfraRed);
-//		Dispersion dispersion = new Dispersion(pilot, mediumInfraRed, longInfraRed);
+		Agregation agregation = new Agregation(pilot, mediumInfraRed, longInfraRed);
+		Dispersion dispersion = new Dispersion(pilot, mediumInfraRed, longInfraRed);
 
-//		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight, agregation, dispersion};
-		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight};
+		Behavior[] behaviorList = {forward, sholve, rotateLeft, rotateRight, agregation, dispersion};
+//		Behavior[] behaviorList  {forward, sholve, rotateLeft, rotateRight};
 		
 		Arbitrator arbitor = new Arbitrator(behaviorList);
 		arbitor.start();

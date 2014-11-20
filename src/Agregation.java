@@ -1,18 +1,18 @@
 import lejos.nxt.Sound;
 import lejos.nxt.addon.OpticalDistanceSensor;
-import lejos.robotics.navigation.CompassPilot;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.util.Delay;
 
 
 public class Agregation implements Behavior{
 
-	private CompassPilot pilot;
+	private DifferentialPilot pilot;
 	private OpticalDistanceSensor mediumInfraRed;
 	private OpticalDistanceSensor longInfraRed;
 	private boolean suppressed;
 	
-	public Agregation(CompassPilot pilot, OpticalDistanceSensor mediumInfraRed, OpticalDistanceSensor longInfraRed){
+	public Agregation(DifferentialPilot pilot, OpticalDistanceSensor mediumInfraRed, OpticalDistanceSensor longInfraRed){
 		this.pilot = pilot;
 		this.mediumInfraRed = mediumInfraRed;
 		this.longInfraRed = longInfraRed;
@@ -38,9 +38,9 @@ public class Agregation implements Behavior{
 		while ((!suppressed) && (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
 			Sound.twoBeeps();
 			if (dist > mediumInfraRed.getDistance()){
-				pilot.forward();
-			}else if ((dist < mediumInfraRed.getDistance()) || (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
 				pilot.backward();
+			}else if ((dist < mediumInfraRed.getDistance()) || (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
+				pilot.forward();
 			}
 			dist = mediumInfraRed.getDistance();
 			Delay.msDelay(100);

@@ -1,4 +1,5 @@
 import lejos.nxt.NXTRegulatedMotor;
+import lejos.nxt.Sound;
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.nxt.addon.GyroSensor;
 import lejos.robotics.navigation.DifferentialPilot;
@@ -36,10 +37,11 @@ public abstract class Rotate implements Behavior {
 		if (derecha){
 			//distance *= -1;
 			radius  *= -1;
-			angleRotate = angleRotate * -1;
+//			angleRotate = angleRotate * -1;
 		}
 		if(angleRotate == Constants.ANGLE_ROTATE2){
-			distance = 25.5f;
+			distance = 23.6f;
+//			Sound.twoBeeps();
 		}
 		//Cambio el estado para pasarlo al estado de giro
 		Variables.state = Constants.STATE.getNextState(Variables.state.ordinal());
@@ -146,7 +148,7 @@ public abstract class Rotate implements Behavior {
 		motorIn.backward();
 		motorOut.backward();
 
-		Delay.msDelay(Constants.TIME_BACKWARD);
+		Delay.msDelay(Constants.TIME_BACKWARD_ALIGN);
 		
 //		motorIn.stop();
 //		motorOut.stop();

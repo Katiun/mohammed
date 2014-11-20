@@ -1,17 +1,16 @@
-import lejos.nxt.SensorPort;
 import lejos.nxt.addon.OpticalDistanceSensor;
-import lejos.robotics.navigation.CompassPilot;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
 
 
 public class Dispersion implements Behavior{
 
-	private CompassPilot pilot;
+	private DifferentialPilot pilot;
 	private OpticalDistanceSensor mediumInfraRed;
 	private OpticalDistanceSensor longInfraRed;
 
-	public Dispersion(CompassPilot pilot, OpticalDistanceSensor mediumInfraRed, OpticalDistanceSensor longInfraRed) {
+	public Dispersion(DifferentialPilot pilot, OpticalDistanceSensor mediumInfraRed, OpticalDistanceSensor longInfraRed) {
 		super();
 		this.pilot = pilot;
 		this.mediumInfraRed = mediumInfraRed;

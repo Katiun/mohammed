@@ -21,7 +21,8 @@ public class Constants {
 	public final static int SPEED_SLOW_SPIN1 = 120;
 	public final static int SPEED_SLOW_SPIN2 = 10;
 	public final static int SPEED_BACWARD = 200;
-	public final static long TIME_BACKWARD = 600; //1 segundos
+	public final static long TIME_BACKWARD = 1500; //1 segundos
+	public final static long TIME_BACKWARD_ALIGN = 700;
 //	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public final static int SPEED_FORWARD = 500;
