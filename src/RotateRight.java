@@ -1,5 +1,7 @@
 import lejos.nxt.addon.CompassHTSensor;
+import lejos.nxt.addon.GyroSensor;
 import lejos.nxt.addon.NXTLineLeader.Command;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.util.Delay;
 
@@ -7,8 +9,12 @@ import lejos.util.Delay;
 public class RotateRight extends Rotate{
 
 	
-	public RotateRight(CompassHTSensor cs){
-		this.cs = cs;
+//	public RotateRight(CompassHTSensor cs, GyroSensor gs){
+//		this.cs = cs;
+//		this.gs = gs;
+//	}
+	public RotateRight(DifferentialPilot pilot){
+		this.pilot = pilot;
 	}
 	
 	@Override
@@ -36,7 +42,7 @@ public class RotateRight extends Rotate{
 
 				Delay.msDelay(Constants.TIME_BACKWARD);
 
-				rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR,true);
+				rotate2(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR,false);
 				break;
 		}
 		Variables.turn = false;

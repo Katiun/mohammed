@@ -1,19 +1,22 @@
 import lejos.nxt.addon.CompassHTSensor;
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.robotics.navigation.CompassPilot;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 
 
 public class Forward implements Behavior{
 
 	private CompassHTSensor cs;
-	private CompassPilot pilot;
+//	private CompassPilot pilot;
+	private DifferentialPilot pilot;
 	private OpticalDistanceSensor mediumInfraRed;
 	private boolean suppressed = false;
 	
 
-	public Forward(CompassHTSensor cs, CompassPilot pilot, OpticalDistanceSensor mediumInfraRed) {
-		this.cs = cs;
+//	public Forward(CompassHTSensor cs, CompassPilot pilot, OpticalDistanceSensor mediumInfraRed) {
+	public Forward(DifferentialPilot pilot, OpticalDistanceSensor mediumInfraRed) {
+//		this.cs = cs;
 		this.pilot = pilot;
 		this.mediumInfraRed = mediumInfraRed;
 	}
@@ -55,9 +58,9 @@ public class Forward implements Behavior{
 			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD_FAST;
 		}else if (Variables.state == Constants.STATE.MEDIUM_RIGHT){
 			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;
-			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD + 2;
+			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD + 5;
 		}else if (Variables.state == Constants.STATE.MEDIUM_LEFT){
-			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD + 2;
+			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD + 5;
 			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD;
 		}else{
 			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;

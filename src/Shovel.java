@@ -2,6 +2,7 @@ import java.util.Date;
 
 import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.robotics.navigation.CompassPilot;
+import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.util.Delay;
 
@@ -9,12 +10,14 @@ import lejos.util.Delay;
 public class Shovel implements Behavior{
 
 	OpticalDistanceSensor mediumInfraRed;
-	CompassPilot pilot;
+//	CompassPilot pilot;
+	DifferentialPilot pilot;
 	private boolean enterErrorZone;
 	private int second;
 	int distance;
 	
-	public Shovel(OpticalDistanceSensor mediumInfraRed, CompassPilot pilot){
+//	public Shovel(OpticalDistanceSensor mediumInfraRed, CompassPilot pilot){
+	public Shovel(OpticalDistanceSensor mediumInfraRed, DifferentialPilot pilot){
 		this.mediumInfraRed = mediumInfraRed;
 		this.pilot = pilot;
 		enterErrorZone = false;

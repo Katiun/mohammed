@@ -14,8 +14,8 @@ public class Constants {
 	public final static int DISTANCE_SHOVEL_ERROR = 180;
 	
 	
-	public final static int ANGLE_ROTATE1 = 180;
-	public final static int ANGLE_ROTATE2 = 270;
+	public final static int ANGLE_ROTATE1 = 170;
+	public final static int ANGLE_ROTATE2 = 255;
 	
 	public final static int SPEED_FAST_SPIN = 350;
 	public final static int SPEED_SLOW_SPIN1 = 120;
@@ -25,7 +25,7 @@ public class Constants {
 //	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public final static int SPEED_FORWARD = 500;
-	public final static int SPEED_FORWARD_FAST = 502;
+	public final static int SPEED_FORWARD_FAST = 505;
 
 	public final static int SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT = 350;
 	public final static int SAFE_LONG_DISTANCE_ANOTHER_AGENT = 500;

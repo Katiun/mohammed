@@ -8,6 +8,7 @@ public class Variables {
 	public static int SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD_FAST;
 	public static int SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD;
 	
+	public static int GYROSCOPE_OFFSET = 0;
 	
 }
 
