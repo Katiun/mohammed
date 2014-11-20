@@ -31,15 +31,23 @@ public abstract class Rotate implements Behavior {
 	}
 
 	private void rotate(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut, float angleRotate, int slowSpeed, int fastSpeed,boolean derecha){
-
+		float distance = 17.0f;
+		float radius = 5.8f;
 		if (derecha){
+			//distance *= -1;
+			radius  *= -1;
 			angleRotate = angleRotate * -1;
+		}
+		if(angleRotate == Constants.ANGLE_ROTATE2){
+			distance = 25.5f;
 		}
 		//Cambio el estado para pasarlo al estado de giro
 		Variables.state = Constants.STATE.getNextState(Variables.state.ordinal());
 		
 		//Aviso al shoter
 		Shot.getInstance().shoter();
+		
+		pilot.travelArc(radius, distance);
 		
 //		cs.resetCartesianZero();
 //		float initialDegrees = cs.getDegreesCartesian();
@@ -128,7 +136,8 @@ public abstract class Rotate implements Behavior {
 ////		motorOut.stop();
 //		Constants.stopMotors();
 
-		pilot.rotate(angleRotate);
+		//pilot.rotate(angleRotate);
+		
 		pilot.stop();
 		
 		//Voy para adelante
