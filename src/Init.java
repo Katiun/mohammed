@@ -58,7 +58,7 @@ public class Init {
 		Constants.SHOVEL_MOTOR.stop();
 		Constants.SHOVEL_MOTOR.resetTachoCount();
 
-//		Delay.msDelay(3000);
+		Delay.msDelay(3000);
 
 		Shot.getInstance();
 		
