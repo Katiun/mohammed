@@ -9,7 +9,7 @@ public class Constants {
 	public final static NXTRegulatedMotor SHOVEL_MOTOR = Motor.C;
 	
 	public final static int ANGLE_SHOVEL = 180;
-	public final static int SPEED_SHOVEL = 200;
+	public final static int SPEED_SHOVEL = 350;
 	public final static int DISTANCE_SHOVEL = 205;
 	public final static int DISTANCE_SHOVEL_ERROR = 180;
 	
@@ -20,13 +20,13 @@ public class Constants {
 	public final static int SPEED_FAST_SPIN = 350;
 	public final static int SPEED_SLOW_SPIN1 = 120;
 	public final static int SPEED_SLOW_SPIN2 = 10;
-	public final static int SPEED_BACWARD = 200;
-	public final static long TIME_BACKWARD = 1500; //1 segundos
-	public final static long TIME_BACKWARD_ALIGN = 700;
+	public final static int SPEED_BACWARD = 300;
+	public final static long TIME_BACKWARD = 1200; //1 segundos
+	public final static long TIME_BACKWARD_ALIGN = 1200;
 //	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public final static int SPEED_FORWARD = 500;
-	public final static int SPEED_FORWARD_FAST = 505;
+	public final static int SPEED_FORWARD_FAST = 503;
 
 	public final static int SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT = 350;
 	public final static int SAFE_LONG_DISTANCE_ANOTHER_AGENT = 500;
