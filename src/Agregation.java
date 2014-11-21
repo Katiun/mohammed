@@ -29,7 +29,7 @@ public class Agregation implements Behavior{
 
 	@Override
 	public void action() {
-		//System.out.println("action Agr");
+		System.out.println("action Agr");
 		
 		//Para el robot
 		Constants.stopMotors();
@@ -45,11 +45,13 @@ public class Agregation implements Behavior{
 			}
 		});
 		
-		timer.start();
+		try{
+			timer.start();
+		}catch(Exception ex){ }
 		
 		//Se mueve hacia adelante o hacia atrás segun el otro robot
 		int dist = mediumInfraRed.getDistance();
-		while ((!suppressed) && (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
+		while ((!suppressed) && (dist < Constants.SAFE_DISTANCE_ANOTHER_AGENT)){
 			Sound.twoBeeps(); //Solo para saber que estoy en Agregation
 			if (dist > mediumInfraRed.getDistance()){
 				pilot.backward(); //con el pilot backward va para adelante
@@ -61,7 +63,9 @@ public class Agregation implements Behavior{
 			Thread.yield();
 		}
 		
-		timer.stop();
+		try{
+			timer.stop();
+		}catch(Exception ex){ }
 	}
 
 	@Override

@@ -58,9 +58,9 @@ public class Forward implements Behavior{
 			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD_FAST;
 		}else if (Variables.state == Constants.STATE.MEDIUM_RIGHT){
 			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;
-			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD + 3;
+			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD + 5;
 		}else if (Variables.state == Constants.STATE.MEDIUM_LEFT){
-			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD + 3;
+			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD + 5;
 			Variables.SPEED_FORWARD_RIGHT_MOTOR = Constants.SPEED_FORWARD;
 		}else{
 			Variables.SPEED_FORWARD_LEFT_MOTOR = Constants.SPEED_FORWARD;

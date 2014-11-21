@@ -42,13 +42,22 @@ public class Dispersion implements Behavior{
 
 	@Override
 	public void action() {
-//		System.out.println("action Disp");
+		System.out.println("action Disp");
 //		Constants.stopMotors();
 		pilot.stop();
 		
+		Constants.RIGHT_MOTOR.setSpeed(Constants.SPEED_BACWARD);
+		Constants.LEFT_MOTOR.setSpeed(Constants.SPEED_BACWARD);
+		Constants.RIGHT_MOTOR.backward();
+		Constants.LEFT_MOTOR.backward();
+
+		Delay.msDelay(Constants.TIME_BACKWARD / 3);
+		Constants.stopMotors();
+
 		//Si es por timeout elijo realizo una acción que trata de sacar al robot de deadlock
 		//si sale por otra condición sigue ejecutando como si no hubiera pasado nada
-		if (Variables.dispersionTimeout){
+		if ((longInfraRed.getDistance() < Constants.DISTANCE_DISPERSION_ROTATE)){
+			/*
 			switch(Variables.state){
 				case FAR_LEFT:
 				case MEDIUM_LEFT:
@@ -57,7 +66,6 @@ public class Dispersion implements Behavior{
 					
 				case NEARBY_LEFT:
 				case UP_LEFT:
-					//No preciso ir hacia atrás, si hay un robot delante estoy lejos de la pared
 					rotate(Constants.RIGHT_MOTOR, Constants.LEFT_MOTOR, Constants.ANGLE_ROTATE2, Constants.SPEED_SLOW_SPIN2, Constants.SPEED_FAST_SPIN, true);
 					break;
 					
@@ -68,8 +76,21 @@ public class Dispersion implements Behavior{
 					
 				case NEARBY_RIGHT:
 				case UP_RIGHT:
-					//No preciso ir hacia atrás, si hay un robot delante estoy lejos de la pared
 					rotate(Constants.LEFT_MOTOR, Constants.RIGHT_MOTOR, Constants.ANGLE_ROTATE2, Constants.SPEED_SLOW_SPIN2, Constants.SPEED_FAST_SPIN, false);
+					break;
+			}
+			*/
+			switch(Variables.state){
+			case UP_LEFT:
+			case UP_RIGHT:
+				break;
+				
+				default: 
+					Constants.SHOVEL_MOTOR.setSpeed(Constants.SPEED_SHOVEL);
+					Constants.SHOVEL_MOTOR.rotateTo(Constants.ANGLE_SHOVEL);
+
+					Variables.turn = true;
+					Variables.shovel = false;
 					break;
 			}
 		}
