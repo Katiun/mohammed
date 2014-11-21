@@ -32,15 +32,15 @@ public abstract class Rotate implements Behavior {
 	}
 
 	private void rotate(NXTRegulatedMotor motorIn, NXTRegulatedMotor motorOut, float angleRotate, int slowSpeed, int fastSpeed,boolean derecha){
-		float distance = 17.0f;
-		float radius = 5.8f;
+		float distance = Constants.DISTANCE_ROTATE_1;
+		float radius = Constants.RADIUS_ROTATE;
 		if (derecha){
 			//distance *= -1;
-			radius  *= -1;
+			radius *= -1;
 //			angleRotate = angleRotate * -1;
 		}
 		if(angleRotate == Constants.ANGLE_ROTATE2){
-			distance = 23.6f;
+			distance = Constants.DISTANCE_ROTATE_2;
 //			Sound.twoBeeps();
 		}
 		//Cambio el estado para pasarlo al estado de giro

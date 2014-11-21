@@ -3,6 +3,8 @@ import lejos.nxt.addon.OpticalDistanceSensor;
 import lejos.robotics.navigation.DifferentialPilot;
 import lejos.robotics.subsumption.Behavior;
 import lejos.util.Delay;
+import lejos.util.Timer;
+import lejos.util.TimerListener;
 
 
 public class Agregation implements Behavior{
@@ -21,31 +23,45 @@ public class Agregation implements Behavior{
 	
 	@Override
 	public boolean takeControl() {
-		return mediumInfraRed.getDistance() < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT && longInfraRed.getDistance() > Constants.SAFE_LONG_DISTANCE_ANOTHER_AGENT;
+		return mediumInfraRed.getDistance() < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT && longInfraRed.getDistance() > Constants.SAFE_LONG_DISTANCE_ANOTHER_AGENT &&
+				!Variables.turn && !Variables.shovel;
 	}
 
 	@Override
 	public void action() {
 		//System.out.println("action Agr");
 		
-		//System.out.println("MIR: " + mediumInfraRed.getDistance());
-		//System.out.println("LIR: " + longInfraRed.getDistance());
+		//Para el robot
 		Constants.stopMotors();
 		
+		//Habilita a que se pueda ejecutar el comportamiento Dispersion
 		Variables.dispersion = true;
 		
+		//Inicio un timer para no quedar en deadlock
+		Timer timer = new Timer(Constants.TIMEOUT_AGREGATION, new TimerListener() {
+			@Override
+			public void timedOut() {
+				Variables.dispersionTimeout = true;
+			}
+		});
+		
+		timer.start();
+		
+		//Se mueve hacia adelante o hacia atrás segun el otro robot
 		int dist = mediumInfraRed.getDistance();
 		while ((!suppressed) && (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
-			Sound.twoBeeps();
+			Sound.twoBeeps(); //Solo para saber que estoy en Agregation
 			if (dist > mediumInfraRed.getDistance()){
-				pilot.backward();
+				pilot.backward(); //con el pilot backward va para adelante
 			}else if ((dist < mediumInfraRed.getDistance()) || (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
-				pilot.forward();
+				pilot.forward(); //con el pilot forward va para atrás
 			}
 			dist = mediumInfraRed.getDistance();
 			Delay.msDelay(100);
 			Thread.yield();
 		}
+		
+		timer.stop();
 	}
 
 	@Override

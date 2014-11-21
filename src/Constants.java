@@ -31,6 +31,13 @@ public class Constants {
 	public final static int SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT = 350;
 	public final static int SAFE_LONG_DISTANCE_ANOTHER_AGENT = 500;
 	public final static int DELTA_DISTANCE = 100;
+	public final static int MAXIMUM_RANGE_MEDIUM_INFRARED = 800;
+	
+	public final static int TIMEOUT_AGREGATION = 15000; //10 segundos
+	
+	public final static float DISTANCE_ROTATE_1 = 17.2f;
+	public final static float DISTANCE_ROTATE_2 = 23.6f;
+	public final static float RADIUS_ROTATE = 5.8f;
 	
 	public enum STATE{
 		FAR_LEFT,

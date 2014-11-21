@@ -52,6 +52,7 @@ public class Shovel implements Behavior{
 		// TODO Auto-generated method stub
 //		Constants.RIGHT_MOTOR.stop();
 //		Constants.LEFT_MOTOR.stop();
+		Variables.shovel = true;
 		pilot.stop();
 
 ////		Constants.RIGHT_MOTOR.backward();
@@ -93,6 +94,7 @@ public class Shovel implements Behavior{
 		Constants.SHOVEL_MOTOR.rotateTo(Constants.ANGLE_SHOVEL);
 
 		Variables.turn = true;
+		Variables.shovel = false;
 	}
 
 	@Override
