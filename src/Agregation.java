@@ -38,34 +38,54 @@ public class Agregation implements Behavior{
 		Variables.dispersion = true;
 		
 		//Inicio un timer para no quedar en deadlock
-		Timer timer = new Timer(Constants.TIMEOUT_AGREGATION, new TimerListener() {
-			@Override
-			public void timedOut() {
-				Variables.dispersionTimeout = true;
-			}
-		});
+//		Timer timer = new Timer(Constants.TIMEOUT_AGREGATION, new TimerListener() {
+//			@Override
+//			public void timedOut() {
+//				Variables.dispersionTimeout = true;
+//			}
+//		});
 		
-		try{
-			timer.start();
-		}catch(Exception ex){ }
+//		try{
+//			timer.start();
+//		}catch(Exception ex){ }
 		
 		//Se mueve hacia adelante o hacia atrás segun el otro robot
 		int dist = mediumInfraRed.getDistance();
-		while ((!suppressed) && (dist < Constants.SAFE_DISTANCE_ANOTHER_AGENT)){
+		boolean a=true;
+		boolean b=true;
+		while ((!suppressed) && (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
 			Sound.twoBeeps(); //Solo para saber que estoy en Agregation
-			if (dist > mediumInfraRed.getDistance()){
-				pilot.backward(); //con el pilot backward va para adelante
-			}else if ((dist < mediumInfraRed.getDistance()) || (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)){
+			if ((dist > mediumInfraRed.getDistance()) || (dist < Constants.SAFE_DISTANCE_ANOTHER_AGENT)){
 				pilot.forward(); //con el pilot forward va para atrás
-			}
+			}else if (dist < mediumInfraRed.getDistance()){
+				pilot.backward(); //con el pilot backward va para adelante
+			}else{
+				pilot.stop();
+			}	
 			dist = mediumInfraRed.getDistance();
 			Delay.msDelay(100);
+			
 			Thread.yield();
 		}
+		pilot.stop();
+//		int dist = mediumInfraRed.getDistance();
+//		int distL =longInfraRed.getDistance();
+//		while ((!suppressed) && (dist < Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT)&& (Constants.SAFE_LONG_DISTANCE_ANOTHER_AGENT < distL )){
+//			Sound.twoBeeps(); //Solo para saber que estoy en Agregation
+//			if ((dist > Constants.SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT-60)){
+//				pilot.backward(); //con el pilot backward va para adelante
+//			}else if (dist < Constants.SAFE_DISTANCE_ANOTHER_AGENT-10){
+//				pilot.forward(); //con el pilot forward va para atrás
+//			}
+//			Delay.msDelay(100);
+//			Thread.yield();
+//			dist = mediumInfraRed.getDistance();
+//			distL =longInfraRed.getDistance();
+//		}
 		
-		try{
-			timer.stop();
-		}catch(Exception ex){ }
+//		try{
+//			timer.stop();
+//		}catch(Exception ex){ }
 	}
 
 	@Override

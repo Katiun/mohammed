@@ -48,17 +48,30 @@ public class Init {
 //		Variables.GYROSCOPE_OFFSET = gs.readValue();
 	private static void init(){
 
-		Variables.turn = false;
-		Variables.state = Constants.STATE.FAR_LEFT;
+		int startPosition = -1;
+		while ((startPosition != Button.ID_LEFT) && (startPosition != Button.ID_RIGHT)){
+			System.out.println("Indique hacia donde se encuentra la pared de fondo:");
+			startPosition = Button.waitForAnyPress();
+		}
 		
-//		Delay.msDelay(2000);
+		Variables.turn = false;
+		
+		if (startPosition == Button.ID_RIGHT){
+			// Si la pared está a la derecha entonces hay que tirar pelotas hacia la izquierda
+			Variables.state = Constants.STATE.FAR_LEFT; 
+		}else{
+			// Si la pared está a la izquierda entonces hay que tirar pelotas hacia la derecha
+			Variables.state = Constants.STATE.FAR_RIGHT;
+		}
+		
+		Delay.msDelay(2000);
 
 		Constants.SHOVEL_MOTOR.setSpeed(Constants.SPEED_SHOVEL);
 		Constants.SHOVEL_MOTOR.rotateTo(-Constants.ANGLE_SHOVEL);
 		Constants.SHOVEL_MOTOR.stop();
 		Constants.SHOVEL_MOTOR.resetTachoCount();
 
-		Delay.msDelay(3000);
+//		Delay.msDelay(3000);
 
 		Shot.getInstance();
 		

@@ -26,18 +26,18 @@ public class Constants {
 //	public final static long TIME_FORWARD = 2000; //3 segundos
 	
 	public final static int SPEED_FORWARD = 500;
-	public final static int SPEED_FORWARD_FAST = 505;
+	public final static int SPEED_FORWARD_FAST = SPEED_FORWARD + 5;
 
-	public final static int SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT = 470;
-	public final static int SAFE_DISTANCE_ANOTHER_AGENT = 340;
+	public final static int SAFE_MEDIUM_DISTANCE_ANOTHER_AGENT = 400;
+	public final static int SAFE_DISTANCE_ANOTHER_AGENT = 350;
 	public final static int SAFE_LONG_DISTANCE_ANOTHER_AGENT = 600;
-	public final static int DELTA_DISTANCE = 100;
+	public final static int DELTA_DISTANCE = 70;
 	public final static int MAXIMUM_RANGE_MEDIUM_INFRARED = 800;
 	
-	public final static int TIMEOUT_AGREGATION = 50000; //10 segundos
+	public final static int TIMEOUT_AGREGATION = 15000; //10 segundos
 	
 	public final static int DISTANCE_DISPERSION_ROTATE = 14000;
-	public final static float DISTANCE_ROTATE_1 = 17.2f;
+	public final static float DISTANCE_ROTATE_1 = 17.5f;
 	public final static float DISTANCE_ROTATE_2 = 23.6f;
 	public final static float RADIUS_ROTATE = 5.8f;
 	
